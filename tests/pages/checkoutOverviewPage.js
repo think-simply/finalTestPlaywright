@@ -4,7 +4,8 @@ import {
    firstName,
    lastName,
    postCode,
-   continueButton
+   continueButton,
+   totalPrice
 } from "../selectors/checkoutSelector";
 
 import {
@@ -32,7 +33,7 @@ class CheckoutPage extends BasePage {
       });
   
       // Get the displayed total from the page
-      const displayedTotal = await this.page.$eval('.summary_total_label', el => 
+      const displayedTotal = await this.page.$eval(totalPrice, el => 
         parseFloat(el.textContent.replace('Total: $', ''))
       );
       // Assertions
