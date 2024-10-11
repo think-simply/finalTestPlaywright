@@ -1,0 +1,11 @@
+export const hambugerButton = '#react-burger-menu-btn'
+export const productBox = '.inventory_item'
+export const addToCartButton1 ='#add-to-cart-sauce-labs-backpack'
+export const addToCartButton2 ='#add-to-cart-sauce-labs-bolt-t-shirt'
+export const afterAddToCart = 'Remove'
+export const productName = 'Sauce Labs Backpack'
+export const cartIcon = '#shopping_cart_container'
+export const cartQty = '.shopping_cart_badge'
+export const sortIcon = '.active_option'
+export const filterDropdownProduct = '.product_sort_container'
+export const lohi = '//option[contains(@value, "lohi")]';
