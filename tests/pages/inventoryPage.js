@@ -62,14 +62,38 @@ class InventoryPage extends BasePage {
     }
 
     // filter low to high
+    // async filterPriceLowToHigh() {
+    //     await this.page.locator('.select_container').click({ timeout: 5000 })
+    //     await this.page.locator('.select_container').click({ timeout: 5000 })
+    //     // await expect(this.page.locator(filterDropdownProduct)).toBeVisible();
+    //     await this.page.locator('//option[contains(@value, "lohi")]').click();
+
+
+
+    // }
     async filterPriceLowToHigh() {
-        await this.page.locator('.select_container').click({ timeout: 5000 })
-        await this.page.locator('.select_container').click({ timeout: 5000 })
-        // await expect(this.page.locator(filterDropdownProduct)).toBeVisible();
-        await this.page.locator('//option[contains(@value, "lohi")]').click();
+        // Get all product prices
+        const getprices = async () => await this.page.$$eval('.inventory_item_price', elements =>
+            elements.map(el => parseFloat(el.innerText.replace('$', '')))
+        );
+        // Get initial product prices
+        const initialPrices = await getprices();
 
+        // Click on the sort dropdown (adjust the selector as needed)
+        await this.page.click('.select_container, .product_sort_container');
 
+        // Select the "low to high" option
+        await this.page.selectOption('.select_container select, .product_sort_container select', 'lohi');
 
+        // Get the sorted product prices
+        const sortedPrices = await getprices();
+
+        // Check if the prices are in ascending order
+        for (let i = 1; i < sortedPrices.length; i++) {
+            expect(sortedPrices[i]).toBeGreaterThanOrEqual(sortedPrices[i - 1]);
+        }
+        // Additional assertion to ensure sorting actually changed something
+        expect(sortedPrices[0]).toBeLessThanOrEqual(sortedPrices[sortedPrices.length - 1]);
     }
 }
 export { InventoryPage }
