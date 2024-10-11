@@ -8,9 +8,10 @@ import {
     afterAddToCart,
     cartIcon,
     cartQty,
-    filterDropdownProduct,
-    lohi,
+    priceTag,
+    lohiOption,
     sortIcon,
+    filterDropdownProduct
 } from "../selectors/inventorySelector";
 
 class InventoryPage extends BasePage {
@@ -61,29 +62,21 @@ class InventoryPage extends BasePage {
         expect(parseInt(cartItemCount)).toBe(2);
     }
 
-    // filter low to high
-    // async filterPriceLowToHigh() {
-    //     await this.page.locator('.select_container').click({ timeout: 5000 })
-    //     await this.page.locator('.select_container').click({ timeout: 5000 })
-    //     // await expect(this.page.locator(filterDropdownProduct)).toBeVisible();
-    //     await this.page.locator('//option[contains(@value, "lohi")]').click();
 
-
-
-    // }
+    // Filter products from low price to high price
     async filterPriceLowToHigh() {
         // Get all product prices
-        const getprices = async () => await this.page.$$eval('.inventory_item_price', elements =>
+        const getprices = async () => await this.page.$$eval(priceTag, elements =>
             elements.map(el => parseFloat(el.innerText.replace('$', '')))
         );
         // Get initial product prices
         const initialPrices = await getprices();
 
         // Click on the sort dropdown (adjust the selector as needed)
-        await this.page.click('.select_container, .product_sort_container');
+        await this.page.click(sortIcon);
 
         // Select the "low to high" option
-        await this.page.selectOption('.select_container select, .product_sort_container select', 'lohi');
+        await this.page.selectOption(filterDropdownProduct,lohiOption);
 
         // Get the sorted product prices
         const sortedPrices = await getprices();
