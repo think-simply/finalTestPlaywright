@@ -23,7 +23,6 @@ test.describe('Shopping Cart Functionality', () => {
         await pageFactory.CartPage().removeFirstProductFromCart();
         await pageFactory.CartPage().itemNumberInCart();
         
-       
         await page.pause();
     })
 
