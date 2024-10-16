@@ -22,11 +22,7 @@ test.describe('Checkout feature', () => {
         await pageFactory.CartPage().moveToCheckout();   
         await pageFactory.CheckoutPage().enterCheckoutInfo();
         
-
         await pageFactory.CheckoutPage().caculateTotalPriceNotax();
-
-    
-
 
     });
 });
