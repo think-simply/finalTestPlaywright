@@ -19,9 +19,9 @@ test.describe('Checkout feature', () => {
         await pageFactory.InventoryPage().addFirstProductToCart();
         await pageFactory.InventoryPage().addSecondProductToCart();
         await pageFactory.InventoryPage().goToCartPage();
-        await pageFactory.CartPage().moveToCheckout();   
+        await pageFactory.CartPage().moveToCheckout();
         await pageFactory.CheckoutPage().enterCheckoutInfo();
-        
+
         await pageFactory.CheckoutPage().caculateTotalPriceNotax();
 
     });
